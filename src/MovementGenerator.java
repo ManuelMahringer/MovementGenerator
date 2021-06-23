@@ -1,13 +1,11 @@
 import java.io.*;
-import java.net.*;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.Random;
 
 enum Position {
-    Start,
+    START,
     SCP3,
     KEPLER,
     MANAGEMENT,
@@ -16,21 +14,19 @@ enum Position {
 
 
 public class MovementGenerator {
-    private static int filecount = 100;
-    private static String directory = "D:\\Routes_output\\";
-    private static int wait_time = 80;
-    private static int starting_interval = 10;
-    private static int intermediate_interval = 20;
+    private static final int file_count = 100;                         // amount of gps files to be created
+    private static final String directory = "D:\\Routes_output\\";    // output directory - must exist
+    private static final int wait_time = 80;                          // time between route sections
+    private static final int starting_interval = 10;                  // variance in starting time
+    private static final int intermediate_interval = 20;              // variance of time frame in intermediate route sections
     private static StringBuilder result;
     private static String returnRoute;
 
     public static void main(String[] args){
-        filecount = 100;
-        directory = "D:\\Routes_output\\";
 
-        for(int i = 0; i<filecount;i++){
+        for(int i = 0; i < file_count; i++){
             File gpsFile = CreateFile(String.valueOf(i), directory);
-            Position currPos = Position.Start;
+            Position currPos = Position.START;
             System.out.println("writing " + gpsFile.getAbsolutePath());
 
             result = new StringBuilder();
@@ -86,7 +82,7 @@ public class MovementGenerator {
         }
         f = new File("Routes/Return/"+ source + "-" + returnRoute + ".gps");
         result.append(readContent(f));
-        return Position.Start;
+        return Position.START;
     }
 
     public static Position appendNextRandomDestination(Position currPos){
