@@ -104,9 +104,7 @@ public class MovementGenerator {
         Position value = Position.valueOf(file.getName().substring(posStart+1, posEnd).toUpperCase(Locale.ROOT));
         if(currPos.ordinal() == 0){
             returnRoute =  file.getName().split("\\-")[0];
-            System.out.println("RR "+ returnRoute);
         }
-        System.out.println(value);
         return value;
     }
 
